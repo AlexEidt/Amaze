@@ -27,7 +27,9 @@ func main() {
 	random := flag.Bool("r", false, "Generate Random Patterns.")
 	chars := flag.String("chars", charset, "Character set to use for patterns.")
 	background := flag.String("bg", "255,255,255", "Background color in format 'R,G,B' or in hex format.")
+	bgOpacity := flag.Int("bgo", 255, "Background Color Opacity.")
 	foreground := flag.String("fg", "0,0,0", "Foreground color in format 'R,G,B' or in hex format.")
+	fgOpacity := flag.Int("fgo", 255, "Foreground Color Opacity.")
 	fontSize := flag.Int("size", 100, "Font Size.")
 	w := flag.Int("w", 1920, "Image width.")
 	h := flag.Int("h", 1080, "Image height.")
@@ -46,7 +48,7 @@ func main() {
 	canvas := gg.NewContext(*w, *h)
 
 	bR, bG, bB := ProcessRGB(*background)
-	canvas.SetRGB255(bR, bG, bB)
+	canvas.SetRGBA255(bR, bG, bB, *bgOpacity)
 	canvas.Clear()
 
 	face := truetype.NewFace(font, &truetype.Options{Size: float64(*fontSize)})
@@ -75,21 +77,21 @@ func main() {
 			} else {
 				text += string(char)
 			}
-			Amaze(canvas, r, strconv.Itoa(count)+filename, text, *random, fR, fG, fB)
+			Amaze(canvas, r, strconv.Itoa(count)+filename, text, *random, fR, fG, fB, *fgOpacity)
 			count++
 			if count > *limit {
 				break
 			}
-			canvas.SetRGB255(bR, bG, bB)
+			canvas.SetRGBA255(bR, bG, bB, *bgOpacity)
 			canvas.Clear()
 		}
 	} else {
-		Amaze(canvas, r, filename, *chars, *random, fR, fG, fB)
+		Amaze(canvas, r, filename, *chars, *random, fR, fG, fB, *fgOpacity)
 	}
 }
 
 // Create the maze graphic given certain text.
-func Amaze(canvas *gg.Context, r *rand.Rand, filename, text string, random bool, R, G, B int) {
+func Amaze(canvas *gg.Context, r *rand.Rand, filename, text string, random bool, R, G, B, A int) {
 	w, h := canvas.Width(), canvas.Height()
 
 	size_w, size_h := canvas.MeasureString(string(text[0]))
@@ -101,7 +103,7 @@ func Amaze(canvas *gg.Context, r *rand.Rand, filename, text string, random bool,
 	}
 	row := 0.0
 
-	canvas.SetRGB255(R, G, B)
+	canvas.SetRGBA255(R, G, B, A)
 	for row < float64(h)+size_h {
 		column := 0.0
 		for column < float64(w) {

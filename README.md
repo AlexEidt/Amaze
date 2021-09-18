@@ -69,10 +69,14 @@ go run amaze.go [optional args] filename
   -a    Create one frame per character in character set.
   -bg string
         Background color in format 'R,G,B' or in hex format. (default "255,255,255")
+  -bgo int
+        Background Color Opacity. (default 255)
   -chars string
         Character set to use for patterns. (default "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~")
   -fg string
         Foreground color in format 'R,G,B' or in hex format. (default "0,0,0")
+  -fgo int
+        Foreground Color Opacity. (default 255)
   -font string
         Font to write letters in. One of: boxwood, labyrinth, metropolis, palazzo, path, sandcastle, underworld, utopia, ziggurat. (default "metropolis")
   -h int
