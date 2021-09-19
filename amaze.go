@@ -95,11 +95,9 @@ func Amaze(canvas *gg.Context, r *rand.Rand, filename, text string, random bool,
 	w, h := canvas.Width(), canvas.Height()
 
 	size_w, size_h := canvas.MeasureString(string(text[0]))
-	var index int
+	index := 0
 	if random {
 		index = r.Intn(len(text))
-	} else {
-		index = 0
 	}
 	row := 0.0
 
