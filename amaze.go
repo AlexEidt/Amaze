@@ -155,7 +155,7 @@ func GroupSizes(canvas *gg.Context, charset string) []string {
 	return groups
 }
 
-// Parses RGB or hex strings into three separate R, G, B floats between 0 and 1.
+// Parses RGB or hex strings into three separate R, G, B values between 0 and 255.
 func ProcessRGB(rgb string) (int, int, int) {
 	hex := map[byte]int{
 		'0': 0, '1': 1, '2': 2, '3': 3,
