@@ -65,7 +65,9 @@ Maze pattern generator.
 
 ```
 go run amaze.go [optional args] filename
+```
 
+```
   -a    Create one frame per character in character set.
   -bg string
         Background color in RGBA format. (default "255,255,255,255")
