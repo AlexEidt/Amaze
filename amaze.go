@@ -78,13 +78,11 @@ func main() {
 
 	if *animate {
 		text := ""
-		count := 0
-		for _, char := range *chars {
+		for i, char := range *chars {
 			text += string(char)
 			canvas.SetRGBA255(fR, fG, fB, fA)
-			Amaze(canvas, strconv.Itoa(count)+filename, text, *random)
-			count++
-			if count > *limit {
+			Amaze(canvas, strconv.Itoa(i)+filename, text, *random)
+			if i > *limit {
 				break
 			}
 			canvas.SetRGBA255(bR, bG, bB, bA)
