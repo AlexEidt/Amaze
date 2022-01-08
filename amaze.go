@@ -57,15 +57,15 @@ func main() {
 	canvas.Clear()
 	canvas.SetRGBA255(fR, fG, fB, fA)
 
-	font := GetFont(filepath.Join("Fonts", *fontType+".ttf"))
-	face := truetype.NewFace(
-		font,
-		&truetype.Options{
-			// Round *fontSize to the nearest 10.
-			Size: float64(int(math.Ceil(float64(*fontSize)/10.0)) * 10),
-		},
+	canvas.SetFontFace(
+		truetype.NewFace(
+			GetFont(filepath.Join("Fonts", *fontType+".ttf")),
+			&truetype.Options{
+				// Round *fontSize to the nearest 10.
+				Size: float64(int(math.Ceil(float64(*fontSize)/10.0)) * 10),
+			},
+		),
 	)
-	canvas.SetFontFace(face)
 
 	if *random {
 		runes := []rune(*chars)
@@ -140,7 +140,7 @@ func GetFont(filename string) *truetype.Font {
 func ProcessRGB(rgba string) (int, int, int, int) {
 	colors := strings.Split(rgba, ",")
 	if len(colors) != 4 {
-		panic(rgba + "is not a valid RGBA string.")
+		panic(rgba + " is not a valid RGBA string.")
 	}
 
 	R, _ := strconv.Atoi(colors[0])
